@@ -5,6 +5,6 @@ import { render, screen } from '@testing-library/react';
 describe('App', () => {
   it('should have headline', () => {
     render(<App />);
-    expect(screen.getByText(/Hello world!!/i)).toBeInTheDocument();
+    expect(screen.getByText(/about/i)).toBeInTheDocument();
   });
 });
