@@ -31,3 +31,29 @@ input[type=text] {
   padding: 10px;
   font-size: 1.5em;
 }
+
+.card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.card {
+  border: 1px solid #000;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #242424;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.card img {
+  max-width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-bottom: 2px solid #242424;
+}

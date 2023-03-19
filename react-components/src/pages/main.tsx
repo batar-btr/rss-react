@@ -1,4 +1,6 @@
+import CardList from '../components/CardList';
 import { Component } from 'react';
+import products from '../data';
 
 interface MainState {
   value: string;
@@ -30,6 +32,7 @@ export default class MainPage extends Component<MainProps, MainState> {
         <form>
           <input type="text" value={this.state.value} onChange={this.onChangeHandler} />
         </form>
+        <CardList cards={products} />
       </>
     );
   }
