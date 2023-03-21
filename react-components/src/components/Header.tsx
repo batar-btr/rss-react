@@ -26,6 +26,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       case '/about-us':
         this.setState(() => ({ currentPage: 'ABOUT-US PAGE' }));
         break;
+      case '/forms':
+        this.setState(() => ({ currentPage: 'FORMS PAGE' }));
+        break;
       default:
         this.setState({ currentPage: 'PAGE NOT FOUND' });
         break;
@@ -43,6 +46,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       case 'About':
         this.setState(() => ({ currentPage: 'ABOUT-US PAGE' }));
         break;
+      case 'Forms':
+        this.setState(() => ({ currentPage: 'FORMS PAGE' }));
+        break;
     }
   };
 
@@ -55,6 +61,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         </NavLink>
         <NavLink to="/about-us" onClick={(e) => this.handleNavigate(e)}>
           About
+        </NavLink>
+        <NavLink to="/forms" onClick={(e) => this.handleNavigate(e)}>
+          Forms
         </NavLink>
       </header>
     );
