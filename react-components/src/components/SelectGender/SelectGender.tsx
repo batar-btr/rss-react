@@ -15,11 +15,11 @@ const SelectGender = React.forwardRef(
           <div className="gender-wrap">
             <div>
               <label htmlFor="male">Male</label>
-              <input name="gender" type="radio" id="male" />
+              <input name="gender" type="radio" id="male" value="male" />
             </div>
             <div>
               <label htmlFor="female">Female</label>
-              <input name="gender" type="radio" id="female" />
+              <input name="gender" type="radio" id="female" value="female" />
             </div>
           </div>
           {!props.error && <p className="error-message">{props.errorMessage}</p>}
