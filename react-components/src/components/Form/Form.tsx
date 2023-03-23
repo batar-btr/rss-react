@@ -7,6 +7,7 @@ import { ValidationState, ValidationsValues } from '../Validation';
 import { SkillsCheckboxes } from '../SkillsCheckboxes/SkillsCheckboxes';
 import { SelectGender } from '../SelectGender/SelectGender';
 import { FileInput } from '../FileInput/FileInput';
+import { ConfirmMessage } from '../ConfirmMessage/ConfirmMessage';
 
 export interface FormProps {
   isValidate: boolean;
@@ -52,6 +53,7 @@ export default class Form extends React.Component<FormProps> {
 
   render() {
     const className = this.props.isValidate ? 'react-form' : 'react-form error';
+    const { validation } = this.props.validation;
     return (
       <>
         <form className={className} onSubmit={(e) => this.submitFormHandler(e)}>
@@ -60,38 +62,35 @@ export default class Form extends React.Component<FormProps> {
             type="text"
             name="Your name"
             errorMessage="text input error"
-            error={this.props.validation.nameInput}
+            error={validation.nameInput}
           />
           <CustomInput
             ref={this.dateInput}
             type="date"
             name="Birthday date"
             errorMessage="date input error"
-            error={this.props.validation.dateInput}
+            error={validation.dateInput}
           />
           <SelectInput
             ref={this.selectInput}
             errorMessage="choose Country"
-            error={this.props.validation.selectInput}
+            error={validation.selectInput}
             options={countries}
           />
           <SkillsCheckboxes
             ref={this.skills}
-            error={this.props.validation.skills}
+            error={validation.skills}
             errorMessage="Choose Your Skills(at least 1)!"
           />
           <SelectGender
             ref={this.gender}
-            error={this.props.validation.gender}
+            error={validation.gender}
             errorMessage="Choose your gender!"
           />
-          <FileInput
-            error={this.props.validation.file}
-            errorMessage="Choose file please!"
-            ref={this.file}
-          />
+          <FileInput error={validation.file} errorMessage="Choose file please!" ref={this.file} />
           <input type="submit" value="Submit" />
         </form>
+        {this.props.validation.confirmMessage && <ConfirmMessage message="USER CREATED!!!" />}
       </>
     );
   }

@@ -16,12 +16,15 @@ interface ValidationProps {
 }
 
 export interface ValidationState {
-  nameInput: boolean;
-  dateInput: boolean;
-  selectInput: boolean;
-  skills: boolean;
-  gender: boolean;
-  file: boolean;
+  validation: {
+    nameInput: boolean;
+    dateInput: boolean;
+    selectInput: boolean;
+    skills: boolean;
+    gender: boolean;
+    file: boolean;
+  };
+  confirmMessage: boolean;
 }
 
 export interface ValidationsValues {
@@ -37,27 +40,54 @@ export default class Validation extends React.Component<ValidationProps, Validat
   constructor(props: ValidationProps) {
     super(props);
     this.state = {
-      nameInput: true,
-      dateInput: true,
-      selectInput: true,
-      skills: true,
-      gender: true,
-      file: true,
+      validation: {
+        nameInput: true,
+        dateInput: true,
+        selectInput: true,
+        skills: true,
+        gender: true,
+        file: true,
+      },
+      confirmMessage: false,
     };
   }
+
+  showConfirmationMessage = () => {
+    this.setState(
+      (state) => {
+        return {
+          ...state,
+          confirmMessage: true,
+        };
+      },
+      () => {
+        setTimeout(() => {
+          this.setState((state) => {
+            return {
+              ...state,
+              confirmMessage: false,
+            };
+          });
+        }, 3000);
+      }
+    );
+  };
 
   globalValidation = (values: ValidationsValues) => {
     this.setState(
       {
-        nameInput: nameValidation(values.nameInput),
-        dateInput: dateValidation(values.dateInput),
-        selectInput: selectValidation(values.selectInput),
-        skills: skillsValidation(values.skills),
-        gender: genderValidation(values.gender),
-        file: fileValidation(values.file),
+        ...this.state,
+        validation: {
+          nameInput: nameValidation(values.nameInput),
+          dateInput: dateValidation(values.dateInput),
+          selectInput: selectValidation(values.selectInput),
+          skills: skillsValidation(values.skills),
+          gender: genderValidation(values.gender),
+          file: fileValidation(values.file),
+        },
       },
       () => {
-        if (Object.values(this.state).every((value) => value)) {
+        if (Object.values(this.state.validation).every((value) => value)) {
           const skills = [...values.skills.elements]
             .filter((elem) => {
               const input = elem as HTMLInputElement;
@@ -85,6 +115,7 @@ export default class Validation extends React.Component<ValidationProps, Validat
             gender: gender.value,
           });
           values.file.form?.reset();
+          this.showConfirmationMessage();
         }
       }
     );
@@ -96,7 +127,7 @@ export default class Validation extends React.Component<ValidationProps, Validat
       <ValidateForm
         validation={this.state}
         validateHandler={(values: ValidationsValues) => this.globalValidation(values)}
-        isValidate={Object.values(this.state).every((value) => value)}
+        isValidate={Object.values(this.state.validation).every((value) => value)}
       />
     );
   }
