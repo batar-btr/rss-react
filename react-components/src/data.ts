@@ -1327,3 +1327,7 @@ const products = [
 ]
 
 export default products;
+
+const countries = ['USA', 'MEXICO', 'SALVADOR', 'COSTA-RICA'];
+
+export {countries};

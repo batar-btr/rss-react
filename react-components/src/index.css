@@ -28,4 +28,10 @@ a {
   color: #fff;
   text-decoration: inherit;
 }
-
+p.error-message {
+  margin: 0;
+  text-align: left;
+  font-size: 12px;
+  padding: 0;
+  background: #ff2e2e;
+}

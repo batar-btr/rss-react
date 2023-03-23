@@ -1,0 +1,13 @@
+.skills {
+  padding: 5px;
+}
+.skills-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skills .error-message {
+  color: #ffffff;
+  font-weight: bold;
+  padding: 3px;
+}
