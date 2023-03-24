@@ -1,4 +1,5 @@
 import React, { ForwardedRef } from 'react';
+import './index.css';
 
 interface FileInputProps {
   error: boolean;
