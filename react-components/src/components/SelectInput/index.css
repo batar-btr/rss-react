@@ -1,0 +1,11 @@
+.select-input-wrapper {
+  padding: 5px;
+}
+.select-input-wrapper select {
+  width: 100%;
+}
+.select-input-wrapper .error-message {
+  color: #ffffff;
+  font-weight: bold;
+  padding: 3px;
+}
