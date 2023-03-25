@@ -8,7 +8,7 @@ interface UserCardProps {
 const UserCard = (props: UserCardProps) => {
   const { name, birthday, country, imgURL, skills, gender } = props.user;
   return (
-    <div className="user-card">
+    <div className="user-card" data-testid="user-card">
       <img src={imgURL} alt={name} />
       <div className="info">
         <h5>{name}</h5>
