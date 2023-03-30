@@ -5,7 +5,15 @@
   display: flex;
   justify-content: space-between;
 }
+.skill-box {
+  display: flex;
+  align-items: center;
+}
 
+.skill-box label {
+  margin: 0;
+  text-transform: uppercase;
+}
 .skills .error-message {
   color: #ffffff;
   font-weight: bold;

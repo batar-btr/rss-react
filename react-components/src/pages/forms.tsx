@@ -1,9 +1,7 @@
-import { Component } from 'react';
-import Validation from '../components/Validation';
-import Form from '../components/Form/Form';
+import { useState } from 'react';
+import { Form } from '../components/Form/Form';
 import { UserCardList } from '../components/UserCardList/UserCardList';
-
-type FormPageProps = Record<string, never>;
+import { ConfirmMessage } from '../components/ConfirmMessage/ConfirmMessage';
 
 export interface User {
   name: string;
@@ -18,25 +16,29 @@ export interface FormPageState {
   users: User[];
 }
 
-export default class FormsPage extends Component<FormPageProps, FormPageState> {
-  constructor(props: FormPageProps) {
-    super(props);
-    this.state = {
-      users: [],
-    };
-  }
+const FormsPage = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
 
-  addUser = (user: User) => {
-    this.setState({ users: [...this.state.users, user] });
+  const addUser = (user: User) => {
+    setUsers((users) => [...users, user]);
   };
 
-  render() {
-    return (
-      <>
-        <h1>Forms Page</h1>
-        <Validation form={Form} addUser={this.addUser} />
-        <UserCardList users={this.state.users} />
-      </>
-    );
-  }
-}
+  const showmMessage = () => {
+    setShowConfirm(true);
+    setTimeout(() => {
+      setShowConfirm(false);
+    }, 3000);
+  };
+
+  return (
+    <>
+      <h1>Forms Page</h1>
+      <Form addUser={addUser} showConfirm={showmMessage} />
+      <UserCardList users={users} />
+      {showConfirm && <ConfirmMessage message="User created!!!" />}
+    </>
+  );
+};
+
+export { FormsPage };

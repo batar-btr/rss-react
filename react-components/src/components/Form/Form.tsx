@@ -1,97 +1,82 @@
-import React, { FormEvent, RefObject, createRef } from 'react';
 import './index.css';
-import { CustomInput } from '../CustomInput/CustomInput';
-import { SelectInput } from '../SelectInput/SelectInput';
 import { countries } from '../../data';
-import { ValidationState, ValidationsValues } from '../Validation';
-import { SkillsCheckboxes } from '../SkillsCheckboxes/SkillsCheckboxes';
-import { SelectGender } from '../SelectGender/SelectGender';
-import { FileInput } from '../FileInput/FileInput';
-import { ConfirmMessage } from '../ConfirmMessage/ConfirmMessage';
+import { User } from '../../pages/forms';
 
-export interface FormProps {
-  isValidate: boolean;
-  validation: ValidationState;
-  validateHandler: (values: ValidationsValues) => void;
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Select } from '../Select/Select';
+import { Skills } from '../Skills/Skills';
+import { Gender } from '../Gender/Gender';
+import { FileInput } from '../FileInput/FileInput';
+import { Error } from '../Error/Error';
+import { useState } from 'react';
+
+export type FormInputs = {
+  name: string;
+  country: string;
+  skills: string[];
+  gender: string;
+  date: string;
+  file: FileList;
+};
+
+interface FormProps {
+  addUser: (user: User) => void;
+  showConfirm: () => void;
 }
 
-export default class Form extends React.Component<FormProps> {
-  nameInput: RefObject<HTMLInputElement>;
-  dateInput: RefObject<HTMLInputElement>;
-  selectInput: RefObject<HTMLSelectElement>;
-  skills: RefObject<HTMLFieldSetElement>;
-  gender: RefObject<HTMLFieldSetElement>;
-  file: RefObject<HTMLInputElement>;
+const Form = ({ addUser, showConfirm }: FormProps) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormInputs>({
+    mode: 'onSubmit',
+  });
 
-  constructor(props: FormProps) {
-    super(props);
-    this.nameInput = createRef<HTMLInputElement>();
-    this.dateInput = createRef<HTMLInputElement>();
-    this.selectInput = createRef<HTMLSelectElement>();
-    this.skills = createRef<HTMLFieldSetElement>();
-    this.gender = createRef<HTMLFieldSetElement>();
-    this.file = createRef<HTMLInputElement>();
-  }
-
-  submitFormHandler = (e: FormEvent) => {
-    e.preventDefault();
-    const nameInputValue = this.nameInput.current?.value as string;
-    const dateInputValue = this.dateInput.current?.value as string;
-    const selectInputValue = this.selectInput.current?.value as string;
-    const skills = this.skills.current as HTMLFieldSetElement;
-    const gender = this.gender.current as HTMLFieldSetElement;
-    const file = this.file.current as HTMLInputElement;
-    this.props.validateHandler({
-      nameInput: nameInputValue,
-      dateInput: dateInputValue,
-      selectInput: selectInputValue,
-      skills: skills,
-      gender: gender,
-      file: file,
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+    const { name, country, skills, gender, date, file } = data;
+    addUser({
+      name,
+      country,
+      skills,
+      gender,
+      birthday: date,
+      imgURL: URL.createObjectURL(file[0]),
     });
+    showConfirm();
+    reset();
   };
 
-  render() {
-    const className = this.props.isValidate ? 'react-form' : 'react-form error';
-    const { validation } = this.props.validation;
-    return (
-      <>
-        <form className={className} onSubmit={(e) => this.submitFormHandler(e)}>
-          <CustomInput
-            ref={this.nameInput}
-            type="text"
-            name="Your name"
-            errorMessage="text input error"
-            error={validation.nameInput}
-          />
-          <CustomInput
-            ref={this.dateInput}
-            type="date"
-            name="Birthday date"
-            errorMessage="date input error"
-            error={validation.dateInput}
-          />
-          <SelectInput
-            ref={this.selectInput}
-            errorMessage="choose Country"
-            error={validation.selectInput}
-            options={countries}
-          />
-          <SkillsCheckboxes
-            ref={this.skills}
-            error={validation.skills}
-            errorMessage="Choose Your Skills(at least 1)!"
-          />
-          <SelectGender
-            ref={this.gender}
-            error={validation.gender}
-            errorMessage="Choose your gender!"
-          />
-          <FileInput error={validation.file} errorMessage="Choose file please!" ref={this.file} />
-          <input type="submit" value="Submit" />
-        </form>
-        {this.props.validation.confirmMessage && <ConfirmMessage message="USER CREATED!!!" />}
-      </>
-    );
-  }
-}
+  return (
+    <div className="react-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          {...register('name', {
+            required: { value: true, message: 'field is required' },
+            pattern: { value: /\b[A-Z][a-z]*\b/, message: 'The first letter must be in uppercase' },
+          })}
+        />
+        {errors.name && <Error message={errors.name.message} />}
+
+        <input type="date" {...register('date', { required: 'set Date please!' })} />
+        {errors.date && <Error message={errors.date.message} />}
+
+        <Select options={countries} register={register} label="country" />
+        {errors.country && <Error message={errors.country.message} />}
+
+        <Skills register={register} label="skills" error={errors.skills} />
+        {errors.skills && <Error message={errors.skills.message} />}
+
+        <Gender register={register} label="gender" legend="Gender" error={errors.gender} />
+        {errors.gender && <Error message={errors.gender.message} />}
+
+        <FileInput register={register} label="file" />
+        {errors.file && <Error message={errors.file?.message} />}
+
+        <input type="submit" value="submit" />
+      </form>
+    </div>
+  );
+};
+export { Form };

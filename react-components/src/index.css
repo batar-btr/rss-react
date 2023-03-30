@@ -17,6 +17,7 @@
   --purple: #535bf2;
   --gold: #fec524;
   --error: #E53935;
+  --pink: #EC5990;
 }
 
 body {
@@ -35,4 +36,8 @@ p.error-message {
   font-size: 12px;
   padding: 0;
   background: var(--error);
+}
+
+fieldset.error {
+  border-color: var(--pink);
 }
