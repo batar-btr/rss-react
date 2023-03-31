@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 .react-form h1 {
@@ -56,11 +57,13 @@
   color: white;
   text-transform: uppercase;
   border: none;
-  margin-top: 40px;
+  margin-top: 10px;
   padding: 20px;
   font-size: 16px;
   font-weight: 100;
   letter-spacing: 10px;
+  transition: all 200ms ease-out;
+  cursor: pointer;
 }
 
 .react-form button[type="submit"]:hover,
@@ -89,6 +92,11 @@
 .react-form input[type="button"],
 .react-form input[type="submit"] {
   -webkit-appearance: none;
+}
+
+.react-form input[type="checkbox"],
+.react-form input[type="radio"] {
+  cursor: pointer;
 }
 
 .react-form .App {
@@ -122,28 +130,7 @@
   border-radius: 4px;
 }
 
-
-/* .react-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  margin: 0 auto;
-  gap: 10px;
-  color: #242424;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
+.react-form label {
+  margin: 0;
+  margin-bottom: -10px;
 }
-
-.react-form.error {
-  border: 4px solid var(--error);
-}
-
-.react-form input[type=submit] {
-  background-color: green;
-  color: #fff;
-  border: none;
-  height: 26px;
-  padding: 5px;
-  border-radius: 6px;
-} */

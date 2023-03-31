@@ -12,7 +12,7 @@ const UserCard = (props: UserCardProps) => {
       <img src={imgURL} alt={name} />
       <div className="info">
         <h5>{name}</h5>
-        <p>{`Birthday ${birthday}`}</p>
+        <p>{`Date: ${birthday}`}</p>
         <p>{country}</p>
         <p className="skills">
           Skills:

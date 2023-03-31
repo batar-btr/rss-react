@@ -41,3 +41,12 @@ p.error-message {
 fieldset.error {
   border-color: var(--pink);
 }
+
+@keyframes slowshow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

@@ -8,7 +8,6 @@ import { Skills } from '../Skills/Skills';
 import { Gender } from '../Gender/Gender';
 import { FileInput } from '../FileInput/FileInput';
 import { Error } from '../Error/Error';
-import { useState } from 'react';
 
 export type FormInputs = {
   name: string;
@@ -51,15 +50,21 @@ const Form = ({ addUser, showConfirm }: FormProps) => {
   return (
     <div className="react-form">
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="name">Name</label>
         <input
+          type="text"
+          id="name"
           {...register('name', {
-            required: { value: true, message: 'field is required' },
-            pattern: { value: /\b[A-Z][a-z]*\b/, message: 'The first letter must be in uppercase' },
+            required: { value: true, message: 'Field is required' },
+            pattern: {
+              value: /^[A-ZА-Я]{1}[A-Za-zА-Яа-я'']*$/,
+              message: 'The first letter must be in uppercase',
+            },
           })}
         />
         {errors.name && <Error message={errors.name.message} />}
-
-        <input type="date" {...register('date', { required: 'set Date please!' })} />
+        <label htmlFor="date">Date</label>
+        <input type="date" id="date" {...register('date', { required: 'Set Date please!' })} />
         {errors.date && <Error message={errors.date.message} />}
 
         <Select options={countries} register={register} label="country" />

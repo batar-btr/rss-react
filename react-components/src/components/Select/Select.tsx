@@ -9,14 +9,17 @@ interface SelectProps {
 
 const Select = ({ register, options, label }: SelectProps) => {
   return (
-    <select {...register(label, { required: 'Choose country!' })}>
-      <option value="">--Choose Country--</option>
-      {options.map((str, idx) => (
-        <option value={str} key={idx}>
-          {str}
-        </option>
-      ))}
-    </select>
+    <>
+      <label htmlFor="country">Country</label>
+      <select {...register(label, { required: 'Choose country!' })}>
+        <option value="">--Choose Country--</option>
+        {options.map((str, idx) => (
+          <option value={str} key={idx}>
+            {str}
+          </option>
+        ))}
+      </select>
+    </>
   );
 };
 

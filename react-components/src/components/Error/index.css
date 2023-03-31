@@ -6,4 +6,6 @@ p.error {
   letter-spacing: 1px;
   border-radius: 4px;
   margin-top: -5px;
+  user-select: none;
+  animation: slowshow 200ms ease-out 0s 1;
 }
