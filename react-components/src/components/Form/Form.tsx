@@ -33,6 +33,7 @@ const Form = ({ addUser, showConfirm }: FormProps) => {
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormInputs>({
     mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
   });
 
   useEffect(() => {
