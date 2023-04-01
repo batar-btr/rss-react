@@ -8,6 +8,7 @@ import { Skills } from '../Skills/Skills';
 import { Gender } from '../Gender/Gender';
 import { FileInput } from '../FileInput/FileInput';
 import { Error } from '../Error/Error';
+import { useEffect } from 'react';
 
 export type FormInputs = {
   name: string;
@@ -28,10 +29,17 @@ const Form = ({ addUser, showConfirm }: FormProps) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState,
+    formState: { errors, isSubmitSuccessful },
   } = useForm<FormInputs>({
     mode: 'onSubmit',
   });
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [formState, isSubmitSuccessful, reset]);
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     const { name, country, skills, gender, date, file } = data;
@@ -44,7 +52,6 @@ const Form = ({ addUser, showConfirm }: FormProps) => {
       imgURL: URL.createObjectURL(file[0]),
     });
     showConfirm();
-    reset();
   };
 
   return (
