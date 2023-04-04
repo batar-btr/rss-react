@@ -1,27 +1,27 @@
 import CardList from '../components/CardList';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import products from '../data';
 
 const MainPage = () => {
   const [value, setValue] = useState(localStorage.getItem('value') || '');
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(
-    () => () => {
-      localStorage.setItem('value', value);
-    },
-    [value]
-  );
+  useEffect(() => {
+    const input = inputRef.current as HTMLInputElement;
+    return () => {
+      localStorage.setItem('value', input.value);
+    };
+  }, []);
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setValue(value);
+  const onChangeHandler = () => {
+    inputRef.current && setValue(inputRef.current.value);
   };
 
   return (
     <>
       <h1>Main Page</h1>
       <form>
-        <input type="text" value={value} onChange={onChangeHandler} />
+        <input ref={inputRef} type="text" value={value} onChange={onChangeHandler} />
       </form>
       <CardList cards={products} />
     </>
