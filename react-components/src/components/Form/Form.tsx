@@ -65,7 +65,7 @@ const Form = ({ addUser, showConfirm }: FormProps) => {
           {...register('name', {
             required: { value: true, message: 'Field is required' },
             pattern: {
-              value: /^[A-ZА-Я]{1}[A-Za-zА-Яа-я'']*$/,
+              value: /^[A-ZА-Я]/,
               message: 'The first letter must be in uppercase',
             },
           })}
