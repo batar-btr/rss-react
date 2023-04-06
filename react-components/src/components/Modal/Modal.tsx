@@ -9,7 +9,7 @@ type ModalProps = {
 
 const closeModal = (func: () => void) => (e: React.MouseEvent) => {
   const target = e.target as HTMLElement;
-  if (target.classList.contains('modal-overlay')) {
+  if (target === e.currentTarget) {
     func();
   }
 };

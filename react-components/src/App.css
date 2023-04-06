@@ -60,3 +60,7 @@ header a.active {
 q {
   color: var(--gold);
 }
+
+.fetch-error {
+  color: tomato;
+}

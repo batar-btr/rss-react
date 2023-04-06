@@ -6,7 +6,7 @@ import { ImgCardList } from '../components/ImgCardList/ImgCardList';
 const MainPage = () => {
   const [searchValue, setSearchValue] = useState<string>(localStorage.getItem('value') || 'random');
   // const [items, setItems] = useState([]);
-  const { loading, error, result } = useSearch(searchValue);
+  const { loading, error, result } = useSearch('search', searchValue);
   return (
     <>
       <SearchBar setQuery={(value: string) => setSearchValue(value)} />
@@ -15,10 +15,10 @@ const MainPage = () => {
       </h3>
       {loading && <h1>LOADING...</h1>}
       {!loading && <ImgCardList cards={result} />}
-      {result.length === 0 && !loading && !error ? (
+      {result?.length === 0 && !loading && !error ? (
         <h1>No images found with this query. Try another keyword!</h1>
       ) : null}
-      {error && error.message}
+      {error && <h2 className="fetch-error">{error.message}</h2>}
     </>
   );
 };

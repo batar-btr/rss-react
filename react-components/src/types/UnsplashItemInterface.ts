@@ -1,3 +1,5 @@
+import User from './UnsplashUserInterface';
+
 export default interface UnsplashItem {
   id: string;
   created_at: string;
@@ -25,4 +27,6 @@ export default interface UnsplashItem {
   };
   likes: number;
   liked_by_user: boolean;
+  views: number;
+  user: User;
 }

@@ -1,0 +1,45 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.img-info {
+  width: 100%;
+  max-width: 600px;
+  min-height: 400px;
+  background-color: #121212;
+  box-shadow: 5px 3px 10px black;
+  animation: slide-in 200ms ease-out;
+  border-radius: 20px;
+}
+
+.img-info__img {
+  display: block;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.img-info__title {
+  margin-left: 20px;
+  text-transform: capitalize;
+}
+
+.img-info__description {
+  padding: 20px;
+}
+
+.img-info__description p {
+  margin: 0;
+}
+
+.img-info__description p span {
+  font-weight: bold;
+  color: var(--gold);
+}
