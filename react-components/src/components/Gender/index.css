@@ -1,0 +1,13 @@
+.gender-wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+.gender-wrap > div {
+  display: flex;
+  align-items: center;
+}
+
+.gender-wrap label {
+  margin: 0;
+}
