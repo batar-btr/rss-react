@@ -1,5 +1,4 @@
 import { createRoot } from 'react-dom/client';
-import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import App from '../App';
