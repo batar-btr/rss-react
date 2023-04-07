@@ -1,4 +1,5 @@
 import { useSearch } from '../../hooks/useSearch';
+import { RotatingLines } from 'react-loader-spinner';
 import './index.css';
 
 interface ImgCardInfoProps {
@@ -11,12 +12,17 @@ export const ImgCardInfo = ({ imgId, closeModal }: ImgCardInfoProps) => {
   if (!result[0]) {
     return (
       <>
-        {loading && <h1>LOADING...</h1>}
+        <RotatingLines
+          strokeColor="#fec524"
+          strokeWidth="3"
+          animationDuration="0.75"
+          width="100px"
+          visible={loading}
+        />
         {error && <h2 className="fetch-error">{error.message}</h2>}
       </>
     );
   } else {
-    console.log(result[0]);
     const {
       user,
       views,
@@ -28,7 +34,6 @@ export const ImgCardInfo = ({ imgId, closeModal }: ImgCardInfoProps) => {
     } = result[0];
     return (
       <>
-        {loading && <h1>LOADING...</h1>}
         {result[0] && (
           <div className="img-info">
             <h3 className="img-info__title">{alt_description || 'No Description...'}</h3>
@@ -51,12 +56,7 @@ export const ImgCardInfo = ({ imgId, closeModal }: ImgCardInfoProps) => {
                 {` ${user.name || 'No user name'}`}
               </p>
             </div>
-            <button
-              className="modal-close-button"
-              onClick={() => {
-                closeModal();
-              }}
-            ></button>
+            <button className="modal-close-button" onClick={closeModal}></button>
           </div>
         )}
         {error && <h2 className="fetch-error">{error.message}</h2>}
