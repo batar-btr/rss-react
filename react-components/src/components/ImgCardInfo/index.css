@@ -32,6 +32,10 @@
 .img-info__title {
   margin-left: 20px;
   text-transform: capitalize;
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .img-info__description {
