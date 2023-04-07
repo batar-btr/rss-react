@@ -22,7 +22,7 @@ export const ImgCard = (props: ImgCardProps) => {
         <img src={small} alt={alt_description} />
       </div>
       <Modal isShowing={showModal} hide={toggleModal}>
-        <ImgCardInfo imgId={id} />
+        <ImgCardInfo imgId={id} closeModal={toggleModal} />
       </Modal>
     </>
   );

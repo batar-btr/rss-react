@@ -5,7 +5,6 @@ import { ImgCardList } from '../components/ImgCardList/ImgCardList';
 
 const MainPage = () => {
   const [searchValue, setSearchValue] = useState<string>(localStorage.getItem('value') || 'random');
-  // const [items, setItems] = useState([]);
   const { loading, error, result } = useSearch('search', searchValue);
   return (
     <>
