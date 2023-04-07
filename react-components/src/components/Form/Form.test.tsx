@@ -6,7 +6,7 @@ const checkboxCount = 5;
 const radioButtonCount = 2;
 
 describe('<Form />', () => {
-  it('Forn render', () => {
+  it('Form render', () => {
     render(<Form addUser={() => {}} showConfirm={() => {}} />);
     expect(screen.getByRole('textbox')).toBeInTheDocument();
     expect(screen.getAllByRole('checkbox')).toHaveLength(checkboxCount);

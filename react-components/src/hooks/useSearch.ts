@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import UnsplashItem from '../types/UnsplashItemInterface';
 
-const APIBASE = 'https://api.unsplash.com/';
+export const APIBASE = 'https://api.unsplash.com/';
 const APIKEY = 'a5palNm0YtmRHuTIcENLO_9wTi1tmWp_Bc2Vg4OpS6Y';
 
 type SearchBy = 'search' | 'id';
