@@ -1,15 +1,12 @@
 import { UserCard } from '../UserCard/UserCard';
-import { User } from '../../pages/forms';
 import './index.css';
+import { useAppSelector } from '../../store/hooks';
 
-interface UserCardListProps {
-  users: User[];
-}
-
-const UserCardList = (props: UserCardListProps) => {
+const UserCardList = () => {
+  const users = useAppSelector((state) => state.users.users);
   return (
     <div className="usercards-wrap">
-      {props.users.map((user, idx) => (
+      {users.map((user, idx) => (
         <UserCard user={user} key={idx} />
       ))}
     </div>

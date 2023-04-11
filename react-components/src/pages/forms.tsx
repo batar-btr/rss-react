@@ -17,12 +17,7 @@ export interface FormPageState {
 }
 
 const FormsPage = () => {
-  const [users, setUsers] = useState<User[]>([]);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
-
-  const addUser = (user: User) => {
-    setUsers((users) => [...users, user]);
-  };
 
   const showmMessage = () => {
     setShowConfirm(true);
@@ -34,8 +29,8 @@ const FormsPage = () => {
   return (
     <>
       <h1>Forms Page</h1>
-      <Form addUser={addUser} showConfirm={showmMessage} />
-      <UserCardList users={users} />
+      <Form showConfirm={showmMessage} />
+      <UserCardList />
       {showConfirm && <ConfirmMessage message="User created!!!" />}
     </>
   );

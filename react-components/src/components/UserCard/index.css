@@ -5,7 +5,7 @@
   color: #242424;
   display: flex;
   flex-direction: column;
-  animation: slowshow 200ms ease-out 0s 1;
+  /* animation: slowshow 200ms ease-out 0s 1; */
 }
 
 .user-card img {

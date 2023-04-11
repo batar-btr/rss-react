@@ -1,7 +1,7 @@
 import './index.css';
 import { countries } from '../../data';
-import { User } from '../../pages/forms';
-
+import { useAppDispatch } from '../../store/hooks';
+import { addUser } from '../../store/usersSlice';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Select } from '../Select/Select';
 import { Skills } from '../Skills/Skills';
@@ -20,11 +20,11 @@ export type FormInputs = {
 };
 
 interface FormProps {
-  addUser: (user: User) => void;
   showConfirm: () => void;
 }
 
-const Form = ({ addUser, showConfirm }: FormProps) => {
+const Form = ({ showConfirm }: FormProps) => {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -44,14 +44,24 @@ const Form = ({ addUser, showConfirm }: FormProps) => {
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     const { name, country, skills, gender, date, file } = data;
-    addUser({
-      name,
-      country,
-      skills,
-      gender,
-      birthday: date,
-      imgURL: URL.createObjectURL(file[0]),
-    });
+    // addUser({
+    //   name,
+    //   country,
+    //   skills,
+    //   gender,
+    //   birthday: date,
+    //   imgURL: URL.createObjectURL(file[0]),
+    // });
+    dispatch(
+      addUser({
+        name,
+        country,
+        skills,
+        gender,
+        birthday: date,
+        imgURL: URL.createObjectURL(file[0]),
+      })
+    );
     showConfirm();
   };
 
