@@ -4,6 +4,7 @@ import { UserCardList } from '../components/UserCardList/UserCardList';
 import { ConfirmMessage } from '../components/ConfirmMessage/ConfirmMessage';
 
 export interface User {
+  id: string;
   name: string;
   birthday: string;
   country: string;

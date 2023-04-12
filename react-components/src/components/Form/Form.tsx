@@ -9,6 +9,7 @@ import { Gender } from '../Gender/Gender';
 import { FileInput } from '../FileInput/FileInput';
 import { Error } from '../Error/Error';
 import { useEffect } from 'react';
+import { nanoid } from 'nanoid';
 
 export type FormInputs = {
   name: string;
@@ -44,16 +45,9 @@ const Form = ({ showConfirm }: FormProps) => {
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     const { name, country, skills, gender, date, file } = data;
-    // addUser({
-    //   name,
-    //   country,
-    //   skills,
-    //   gender,
-    //   birthday: date,
-    //   imgURL: URL.createObjectURL(file[0]),
-    // });
     dispatch(
       addUser({
+        id: nanoid(),
         name,
         country,
         skills,

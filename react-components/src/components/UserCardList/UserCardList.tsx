@@ -6,8 +6,8 @@ const UserCardList = () => {
   const users = useAppSelector((state) => state.users.users);
   return (
     <div className="usercards-wrap">
-      {users.map((user, idx) => (
-        <UserCard user={user} key={idx} />
+      {users.map((user) => (
+        <UserCard user={user} key={user.id} />
       ))}
     </div>
   );

@@ -1,15 +1,12 @@
 import './index.css';
 import { ImgCard } from '../ImgCard/ImgCard';
-import { useSearch } from '../../hooks/useSearch';
 import { RotatingLines } from 'react-loader-spinner';
+import { useGetImagesQuery } from '../../store/api';
+import { useAppSelector } from '../../store/hooks';
 
-interface ImgCardListProps {
-  searchValue: string;
-}
-
-export const ImgCardList = ({ searchValue }: ImgCardListProps) => {
-  const { loading, error, result } = useSearch('search', searchValue);
-
+export const ImgCardList = () => {
+  const searchValue = useAppSelector((store) => store.searchValue.value);
+  const { data, isFetching, isError, error } = useGetImagesQuery(searchValue);
   return (
     <>
       <RotatingLines
@@ -17,15 +14,15 @@ export const ImgCardList = ({ searchValue }: ImgCardListProps) => {
         strokeWidth="3"
         animationDuration="0.75"
         width="10%"
-        visible={loading}
+        visible={isFetching}
       />
       <div className="img-card-list">
-        {!loading && result.map((card) => <ImgCard info={card} key={card.id} />)}
+        {!isFetching && data?.map((card) => <ImgCard info={card} key={card.id} />)}
       </div>
-      {result?.length === 0 && !loading && !error ? (
+      {data?.length === 0 && !isFetching && !isError ? (
         <h1>No images found with this query. Try another keyword!</h1>
       ) : null}
-      {error && <h2 className="fetch-error">{error.message}</h2>}
+      {isError && <h2 className="fetch-error">{error.toString()}</h2>}
     </>
   );
 };
