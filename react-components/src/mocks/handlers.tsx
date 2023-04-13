@@ -3,12 +3,15 @@ import { APIBASE } from '../hooks/useSearch';
 import { mockResults } from './mockData';
 
 export const handlers = [
-  rest.get(`${APIBASE}/search/photos`, (req, res, ctx) => {
+  rest.get(`${APIBASE}search/photos`, (req, res, ctx) => {
+    const query = req.url.searchParams.get('query');
     return res(
-      ctx.status(200),
-      ctx.json({
-        results: [...mockResults],
-      })
+      ctx.json([
+        {
+          results: [...mockResults],
+          description: `Mock photo result for query: ${query}`,
+        },
+      ])
     );
   }),
   rest.get(`${APIBASE}/photos/:id`, (req, res, ctx) => {
