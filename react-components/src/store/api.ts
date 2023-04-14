@@ -10,14 +10,16 @@ interface APIResponse {
 
 export const imgApi = createApi({
   reducerPath: 'unsplashAPI',
-  baseQuery: fetchBaseQuery({ baseUrl: APIBASE }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: APIBASE,
+    headers: {
+      Authorization: `Client-ID ${APIKEY}`,
+    },
+  }),
   endpoints: (build) => ({
     getImages: build.query<UnsplashItem[], string>({
       query: (value) => ({
         url: '/search/photos',
-        headers: {
-          Authorization: `Client-ID ${APIKEY}`,
-        },
         params: {
           query: value || 'random',
         },
@@ -27,9 +29,6 @@ export const imgApi = createApi({
     getImageById: build.query<UnsplashItem, string>({
       query: (id) => ({
         url: `/photos/${id}`,
-        headers: {
-          Authorization: `Client-ID ${APIKEY}`,
-        },
       }),
     }),
   }),
