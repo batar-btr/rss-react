@@ -32,6 +32,7 @@ const Header = (props: HeaderProps) => {
   const handleNavigate = (e: MouseEvent) => {
     const link = e.target as HTMLElement;
     const page = link.textContent;
+    console.log('NAVIGATE');
     switch (page) {
       case 'Main':
         setCurrentPage('MAIN PAGE');

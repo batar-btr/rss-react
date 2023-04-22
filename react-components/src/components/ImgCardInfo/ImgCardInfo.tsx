@@ -1,4 +1,4 @@
-import { RotatingLines } from 'react-loader-spinner';
+// import { RotatingLines } from 'react-loader-spinner';
 import { useGetImageByIdQuery } from '../../store/api';
 import './index.css';
 
@@ -48,13 +48,13 @@ export const ImgCardInfo = ({ imgId, closeModal }: ImgCardInfoProps) => {
   } else {
     return (
       <>
-        <RotatingLines
+        {/* <RotatingLines
           strokeColor="#fec524"
           strokeWidth="3"
           animationDuration="0.75"
           width="100px"
           visible={isFetching}
-        />
+        /> */}
         {isError && <h2 className="fetch-error">{error.toString()}</h2>}
       </>
     );

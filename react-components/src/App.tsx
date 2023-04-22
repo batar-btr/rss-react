@@ -7,7 +7,7 @@ import AboutPage from './pages/about-us';
 import NotFoundPage from './pages/404';
 import { FormsPage } from './pages/forms';
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <>

@@ -1,6 +1,5 @@
 import './index.css';
 import { ImgCard } from '../ImgCard/ImgCard';
-import { RotatingLines } from 'react-loader-spinner';
 import { useGetImagesQuery } from '../../store/api';
 import { useAppSelector } from '../../store/hooks';
 
@@ -9,13 +8,7 @@ export const ImgCardList = () => {
   const { data, isFetching, isError, error } = useGetImagesQuery(searchValue);
   return (
     <>
-      <RotatingLines
-        strokeColor="#fec524"
-        strokeWidth="3"
-        animationDuration="0.75"
-        width="10%"
-        visible={isFetching}
-      />
+      {isFetching && <h2>Loading...</h2>}
       <div className="img-card-list">
         {!isFetching && data?.map((card) => <ImgCard info={card} key={card.id} />)}
       </div>
