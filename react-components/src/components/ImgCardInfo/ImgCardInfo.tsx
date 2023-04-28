@@ -8,7 +8,7 @@ interface ImgCardInfoProps {
 }
 
 export const ImgCardInfo = ({ imgId, closeModal }: ImgCardInfoProps) => {
-  const { data, isFetching, isError, isSuccess, error } = useGetImageByIdQuery(imgId);
+  const { data, isError, isSuccess, error } = useGetImageByIdQuery(imgId);
 
   if (isSuccess) {
     const {

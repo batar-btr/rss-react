@@ -4,6 +4,7 @@ import { describe, it, expect } from 'vitest';
 import { User } from '../../pages/forms';
 
 const testUser: User = {
+  id: 'dsfsfsaf',
   name: 'Test name',
   birthday: '01-01-2001',
   country: 'Kambodja',

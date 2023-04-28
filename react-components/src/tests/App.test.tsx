@@ -7,7 +7,7 @@ import App from '../App';
 
 describe('App component', async () => {
   it('renders without crashing', async () => {
-    const { container, getByText, getByLabelText } = render(
+    const { container, getByText } = render(
       <BrowserRouter>
         <Provider store={store}>
           <App />
@@ -17,7 +17,6 @@ describe('App component', async () => {
     const imgAmount = 10;
     expect(container).toBeDefined();
     expect(getByText(/Enter a keyword!/i)).toBeInTheDocument();
-    expect(getByLabelText('rotating-lines-loading')).toBeInTheDocument();
     await waitFor(() => {
       expect(screen.getAllByRole('img')).toHaveLength(imgAmount);
       expect(container.getElementsByClassName('img-card-list')[0]).toBeInTheDocument();

@@ -21,9 +21,10 @@ const Skills = ({ register, label, error }: SkillsProps) => {
               <input
                 type="checkbox"
                 value={skill}
+                id={skill}
                 {...register(label, { required: 'Select some skills' })}
               />
-              <label htmlFor="skill">{skill}</label>
+              <label htmlFor={skill}>{skill}</label>
             </div>
           );
         })}
